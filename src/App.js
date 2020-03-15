@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react'
 import './App.css';
+import Post from './Post'
+// const firebaseApp = firebase.initializeApp(firebaseConfig);
+// const firebaseAppAuth = firebaseApp.auth();
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+// const providers = {
+//   googleProvider: new firebase.auth.GoogleAuthProvider(),
+// };
+
+class App extends Component {
+  constructor(){
+    super();
+    this.state={
+      user:undefined
+    }
+  }
+  componentDidMount(){
+    this.user = localStorage.getItem("user");
+    console.log(this.user)
+    this.setState({
+      user:this.user
+    })
+  }
+  render() {
+    console.log(this.user)
+    return (
+      <div className="App">
+      {/* <Navbar auth = {this.props.auth} {...this.props}/> */}
+      {this.user ? <Post />:<div>Loading</div>}
     </div>
-  );
+    )
+  }
 }
+
+
+// export default withFirebaseAuth({
+//   providers,
+//   firebaseAppAuth,
+// })(App);
 
 export default App;
